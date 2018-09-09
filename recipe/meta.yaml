@@ -10,33 +10,40 @@ package:
 source:
   fn: Rook_{{ version }}.tar.gz
   url:
-    - https://cran.r-project.org/src/contrib/Rook_{{ version }}.tar.gz
-    - https://cran.r-project.org/src/contrib/Archive/Rook/Rook_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Rook_{{ version }}.tar.gz
+    - {{ cran_mirror }}/src/contrib/Archive/Rook/Rook_{{ version }}.tar.gz
   sha256: 00f4ecfa4c5c57018acbb749080c07154549a6ecaa8d4130dd9de79427504903
 
 build:
   merge_build_host: True  # [win]
-  number: 1
-  skip: true  # [win32]
+  number: 2
+
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
   build:
-    - posix                # [win]
-    - {{ compiler('c') }}        # [unix]
-    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ compiler('c') }}        # [not win]
+    - {{native}}toolchain        # [win]
+    - {{posix}}filesystem        # [win]
+    - {{posix}}make
+    - {{posix}}sed               # [win]
+    - {{posix}}coreutils         # [win]
+    - {{posix}}zip               # [win]
+
   host:
     - r-base
     - r-brew
+
   run:
     - r-base
+    - {{native}}gcc-libs         # [win]
     - r-brew
 
 test:
   commands:
-    - $R -e "library('Rook')"  # [not win]
+    - $R -e "library('Rook')"           # [not win]
     - "\"%R%\" -e \"library('Rook')\""  # [win]
 
 about:
@@ -47,8 +54,14 @@ about:
     and running Rook applications. To get started, be sure and read the 'Rook' help
     file first.
   license_family: GPL2
+  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'  # [unix]
+  license_file: '{{ environ["PREFIX"] }}\R\share\licenses\GPL-2'  # [win]
 
 extra:
   recipe-maintainers:
     - johanneskoester
     - bgruening
+    - daler
+    - jdblischak
+    - cbrueffer
+    - dbast
