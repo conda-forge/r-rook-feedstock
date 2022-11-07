@@ -1,4 +1,4 @@
-{% set version = '1.1-1' %}
+{% set version = "1.2" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -12,11 +12,11 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/Rook_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/Rook/Rook_{{ version }}.tar.gz
-  sha256: 00f4ecfa4c5c57018acbb749080c07154549a6ecaa8d4130dd9de79427504903
+  sha256: c79ae4b5164daffd4e7cf74bd23c1b08a3948bf343dfe9570d57f39cbf8e5f62
 
 build:
-  merge_build_host: True  # [win]
-  number: 1005
+  merge_build_host: true  # [win]
+  number: 0
 
   rpaths:
     - lib/R/lib/
@@ -54,7 +54,7 @@ about:
     and running Rook applications. To get started, be sure and read the 'Rook' help
     file first.
   license_family: GPL2
-  license_file: '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2'
+  license_file: {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-2
 
 extra:
   recipe-maintainers:
