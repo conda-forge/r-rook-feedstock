@@ -3,14 +3,11 @@ About r-rook
 
 Home: https://CRAN.R-project.org/package=Rook
 
-Package license: GPL-2
+Package license: GPL-2.0-only
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-rook-feedstock/blob/main/LICENSE.txt)
 
-Summary: This package contains the Rook specification and convenience software for building
-and running Rook applications. To get started, be sure and read the 'Rook' help
-file first.
-
+Summary: An HTTP web server for R with a documented API to interface between R and the server. The documentation contains the Rook specification and details for building and running Rook applications. To get started, be sure and read the 'Rook' help file first.
 
 Current build status
 ====================
